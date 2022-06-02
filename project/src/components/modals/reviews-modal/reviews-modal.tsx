@@ -6,6 +6,7 @@ import {
   useRef,
   useState
 } from 'react';
+
 import cn from 'classnames';
 import Spinner from '../../spinner/spinner';
 import { changeReviewModalActive } from '../../../store/app-slice/app-slice';
@@ -35,7 +36,7 @@ function ReviewsModal(): JSX.Element | null {
   const dispatch = useAppDispatch();
   const guitar = useAppSelector(selectGuitar);
   const sendCommentStatus = useAppSelector(selectSendCommentStatus);
-  const inputFocus = useRef<HTMLInputElement>(null);
+  const inputFocus = useRef<HTMLInputElement | null>(null);
 
   const [formState, setFormState] = useState<InitialState>({
     name: {
@@ -44,28 +45,24 @@ function ReviewsModal(): JSX.Element | null {
       error: false,
       errorText: 'Заполните поле',
     },
-
     rating: {
       value: '0',
       regexp: REG_EXP_RATING,
       error: false,
       errorText: 'Поставьте оценку',
     },
-
     advantage: {
       value: '',
       regexp: REG_EXP_TEXT,
       error: false,
       errorText: 'Заполните поле',
     },
-
     disadvantage: {
       value: '',
       regexp: REG_EXP_TEXT,
       error: false,
       errorText: 'Заполните поле',
     },
-
     comment: {
       value: '',
       regexp: REG_EXP_TEXT,
@@ -83,14 +80,17 @@ function ReviewsModal(): JSX.Element | null {
   }
 
   const { name, id } = guitar;
-  const ratingLabelMapRevers: [string, string][] =
-    Object.entries(RatingLabelMap);
+  // const ratingLabelMapRevers: [string, string][] = Object.entries(RatingLabelMap).reverse();
+  const ratingLabelMapRevers: [string, string][] = Object.entries(RatingLabelMap);
 
   const isValid = Object.values(formState).some(({ error }) => error);
   const isFormDisabled = sendCommentStatus === FetchStatus.Pending;
 
   const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { value } = evt.target;
+    const { value, name } = evt.target;
+
+    const regExp = formState[name].regexp;
+    const isValid = regExp.test(value);
 
     setFormState((prevState) => ({
       ...prevState,
@@ -128,23 +128,12 @@ function ReviewsModal(): JSX.Element | null {
 
   return (
     <div className="modal__content">
-      <h2 className="modal__header modal__header--review title title--medium">
-        Оставить отзыв
-      </h2>
-      <h3 className="modal__product-name title title--medium-20 title--uppercase">
-        {name}
-      </h3>
+      <h2 className="modal__header modal__header--review title title--medium">Оставить отзыв</h2>
+      <h3 className="modal__product-name title title--medium-20 title--uppercase">{name}</h3>
       <form className="form-review" name="form-review" onSubmit={handleSubmit}>
-        <div
-          className={cn('form-review__wrapper', {
-            [styles.input_mb]: !formState.name.error,
-          })}
-        >
+        <div className={cn('form-review__wrapper', { [styles.input_mb]: !formState.name.error })}>
           <div className="form-review__name-wrapper">
-            <label
-              className="form-review__label form-review__label--required"
-              htmlFor="user-name"
-            >
+            <label className="form-review__label form-review__label--required" htmlFor="user-name">
               Ваше Имя
             </label>
             <input
@@ -159,14 +148,10 @@ function ReviewsModal(): JSX.Element | null {
               required
               disabled={isFormDisabled}
             />
-            {formState.name.error && (
-              <p className="form-review__warning">{formState.name.errorText}</p>
-            )}
+            {formState.name.error && <p className="form-review__warning">{formState.name.errorText}</p>}
           </div>
           <div>
-            <span className="form-review__label form-review__label--required">
-              Ваша Оценка
-            </span>
+            <span className="form-review__label form-review__label--required">Ваша Оценка</span>
             <div className={styles['rate']}>
               {ratingLabelMapRevers.map(([value, title]) => (
                 <Fragment key={title}>
@@ -181,25 +166,16 @@ function ReviewsModal(): JSX.Element | null {
                     required
                     disabled={isFormDisabled}
                   />
-                  <label
-                    className={styles['rate__label']}
-                    htmlFor={`star-${value}`}
-                    title={title}
-                  />
+                  <label className={styles['rate__label']} htmlFor={`star-${value}`} title={title} />
                 </Fragment>
               ))}
 
-              {formState.rating.error && (
-                <p className="rate__message">{formState.rating.errorText}</p>
-              )}
+              {formState.rating.error && <p className="rate__message">{formState.rating.errorText}</p>}
               <div className={styles['rate__focus']} />
             </div>
           </div>
         </div>
-        <label
-          className="form-review__label form-review__label--required"
-          htmlFor="adv"
-        >
+        <label className="form-review__label form-review__label--required" htmlFor="adv">
           Достоинства
         </label>
         <input
@@ -215,16 +191,9 @@ function ReviewsModal(): JSX.Element | null {
           required
           disabled={isFormDisabled}
         />
-        {formState.advantage.error && (
-          <p className="form-review__warning">
-            {formState.advantage.errorText}
-          </p>
-        )}
+        {formState.advantage.error && <p className="form-review__warning">{formState.advantage.errorText}</p>}
 
-        <label
-          className="form-review__label form-review__label--required"
-          htmlFor="disadv"
-        >
+        <label className="form-review__label form-review__label--required" htmlFor="disadv">
           Недостатки
         </label>
         <input
@@ -241,19 +210,12 @@ function ReviewsModal(): JSX.Element | null {
           disabled={isFormDisabled}
         />
         {formState.disadvantage.error && (
-          <p
-            className={cn('form-review__warning', {
-              [styles.input_mb_error]: formState.disadvantage.error,
-            })}
-          >
+          <p className={cn('form-review__warning', { [styles.input_mb_error]: formState.disadvantage.error })}>
             {formState.disadvantage.errorText}
           </p>
         )}
 
-        <label
-          className="form-review__label form-review__label--required"
-          htmlFor="comment"
-        >
+        <label className="form-review__label form-review__label--required" htmlFor="comment">
           Комментарий
         </label>
         <textarea
@@ -270,11 +232,7 @@ function ReviewsModal(): JSX.Element | null {
           disabled={isFormDisabled}
         />
         {formState.comment.error && (
-          <p
-            className={cn('form-review__warning', {
-              [styles.input_mb_error]: formState.comment.error,
-            })}
-          >
+          <p className={cn('form-review__warning', { [styles.input_mb_error]: formState.comment.error })}>
             {formState.comment.errorText}
           </p>
         )}
@@ -282,21 +240,11 @@ function ReviewsModal(): JSX.Element | null {
         <button
           className="button button--medium-20 form-review__button"
           type="submit"
-          disabled={isValid || isFormDisabled}
-        >
-          {isFormDisabled ? (
-            <Spinner className="spinner--small" />
-          ) : (
-            'Отправить отзыв'
-          )}
+          disabled={isValid || isFormDisabled}>
+          {isFormDisabled ? <Spinner className="spinner--small" /> : 'Отправить отзыв'}
         </button>
       </form>
-      <button
-        onClick={handleModalClose}
-        className="modal__close-btn button-cross"
-        type="button"
-        aria-label="Закрыть"
-      >
+      <button onClick={handleModalClose} className="modal__close-btn button-cross" type="button" aria-label="Закрыть">
         <span className="button-cross__icon" />
         <span className="modal__close-btn-interactive-area" />
       </button>
