@@ -1,0 +1,72 @@
+.input_mb {
+  margin-bottom: 20px;
+}
+
+.input_mb_error {
+  margin-bottom: 5px;
+}
+
+.rate {
+  position: relative;
+  width: 100px;
+  height: 20px;
+  border-radius: 2px;
+  background-image: url("./img/icon-star.svg");
+  background-size: 20px 20px;
+  background-repeat: space;
+}
+
+.rate__input:focus ~ .rate__focus {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  outline: 2px solid #585757;
+  outline-offset: 2px;
+}
+
+.rate__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 0;
+  height: 20px;
+  width: 20px;
+  background-size: 20px 20px;
+  background-repeat: space;
+}
+
+.rate__label:hover,
+.rate__input:checked + .rate__label {
+  background-image: url("./img/icon-full-star.svg");
+}
+
+.rate__label:hover ~ .rate__label {
+  background-image: url("./img/icon-star.svg");
+}
+
+.rate__label:nth-of-type(1) {
+  z-index: 5;
+  width: 20px;
+}
+
+.rate__label:nth-of-type(2) {
+  z-index: 4;
+  width: 40px;
+}
+
+.rate__label:nth-of-type(3) {
+  z-index: 3;
+  width: 60px;
+}
+
+.rate__label:nth-of-type(4) {
+  z-index: 2;
+  width: 80px;
+}
+
+.rate__label:nth-of-type(5) {
+  z-index: 1;
+  width: 100px;
+}

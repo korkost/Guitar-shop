@@ -1,0 +1,9 @@
+/node_modules
+/build
+/coverage
+*.log*
+.vscode
+Thumbs.db
+.DS_Store
+.env
+*.md
