@@ -67,8 +67,8 @@ function Reviews(): JSX.Element {
 
       {comments.length > START_COUNT_COMMENT && <UpButton />}
 
-      {isReviewModalOpen && <ModalContainer className={'modal--review'} children={<ReviewsModal />} />};
-      {isReviewSuccessModalOpen && <ModalContainer className={'modal--success'} children={<ReviewsModalSuccess />} />};
+      {isReviewModalOpen && <ModalContainer className={'modal--review'} children={<ReviewsModal />} />}
+      {isReviewSuccessModalOpen && <ModalContainer className={'modal--success'} children={<ReviewsModalSuccess />} />}
     </section>
   );
 }

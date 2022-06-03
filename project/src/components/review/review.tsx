@@ -18,12 +18,7 @@ function Review({ currentComment }: ReviewProps): JSX.Element {
         </h4>
         <span className="review__date">{formatDate(createAt)}</span>
       </div>
-      <Rating
-        rating={rating}
-        className={"review__rating-panel"}
-        currentPosition={"reviews"}
-      />
-
+      <Rating rating={rating} className={"review__rating-panel"} currentPosition={"reviews"} />
       <h4 className="review__title title title--lesser">Достоинства:</h4>
       <p className="review__value">{advantage}</p>
       <h4 className="review__title title title--lesser">Недостатки:</h4>

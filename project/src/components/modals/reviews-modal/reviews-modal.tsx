@@ -80,7 +80,6 @@ function ReviewsModal(): JSX.Element | null {
   }
 
   const { name, id } = guitar;
-  // const ratingLabelMapRevers: [string, string][] = Object.entries(RatingLabelMap).reverse();
   const ratingLabelMapRevers: [string, string][] = Object.entries(RatingLabelMap);
 
   const isValid = Object.values(formState).some(({ error }) => error);

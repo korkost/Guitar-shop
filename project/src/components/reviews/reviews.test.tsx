@@ -2,7 +2,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
 import { render, waitFor } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-
 import Reviews from './reviews';
 import { mockComment } from '../../utils/mock';
 
