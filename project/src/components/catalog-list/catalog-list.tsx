@@ -6,8 +6,14 @@ import ProductCard from '../product-card/product-card';
 import CatalogListEmpty from '../catalog-list-empty/catalog-list-empty';
 import Pagination from '../pagination/pagination';
 
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchGuitarsAction, selectSortedGuitars } from '../../store/guitars-slice/guitars-slice';
+import {
+  useAppDispatch,
+  useAppSelector
+} from '../../hooks/hooks';
+import {
+  fetchGuitarsAction,
+  selectSortedGuitars
+} from '../../store/guitars-slice/guitars-slice';
 
 function CatalogList(): JSX.Element {
   const dispatch = useAppDispatch();

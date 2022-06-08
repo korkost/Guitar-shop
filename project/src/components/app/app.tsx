@@ -17,6 +17,7 @@ function App(): JSX.Element {
       <Routes>
         <Route path={AppRoute.Root} element={<MainOutlet />}>
           <Route index element={<Navigate to={`${AppRoute.Main}/page_1`} replace />} />
+          <Route path={`${AppRoute.Catalog}`} element={<Catalog />}/>
           <Route path={`${AppRoute.Catalog}/page_:number`} element={<Catalog />} />
           <Route path={`${AppRoute.Product}/:id`} element={<Product />} />
           <Route path={AppRoute.Card} element={<Card />} />

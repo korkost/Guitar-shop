@@ -34,10 +34,7 @@ function ProductCard({ guitar }: ProductCardProps): JSX.Element {
         <Link className="button button--mini" to={link}>
           Подробнее
         </Link>
-        <a
-          className="button button--red button--mini button--add-to-cart"
-          href="/"
-        >
+        <a className="button button--red button--mini button--add-to-cart" href="/" >
           Купить
         </a>
       </div>
