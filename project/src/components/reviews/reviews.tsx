@@ -31,7 +31,7 @@ function Reviews(): JSX.Element {
 
   const comments = useAppSelector(selectComments);
   const guitar = useAppSelector(selectGuitar);
-  const commentsSort = useAppSelector(selectCurrentComments);
+  const sortedComments = useAppSelector(selectCurrentComments);
   const commentsCount = useAppSelector(selectCommentsCount);
   const sendCommentStatus = useAppSelector(selectSendCommentStatus);
   const isReviewModalOpen = useAppSelector(selectReviewModalActive);
@@ -59,7 +59,7 @@ function Reviews(): JSX.Element {
       <h3 className="reviews__title title title--bigger">{comments.length !== 0 ? 'Отзывы' : 'Отзывов нет'}</h3>
       <SubmitButton onModalClick={handleModalClick} />
 
-      {commentsSort.map((comment) => (
+      {sortedComments.map((comment) => (
         <Review currentComment={comment} key={comment.id} />
       ))}
 

@@ -1,4 +1,6 @@
 import { Comment } from './comment';
 import { Guitar } from './guitar';
 
-export type Product = Guitar & { comments: Comment[] };
+export interface Product extends Guitar {
+  comments: Comment[];
+}

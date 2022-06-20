@@ -1,18 +1,16 @@
-import { 
-  createAsyncThunk, 
-  createSlice, 
-  createSelector 
-  } from '@reduxjs/toolkit';
+import {
+  createAsyncThunk,
+  createSlice,
+  createSelector } from '@reduxjs/toolkit';
 import { AxiosInstance } from 'axios';
 
 import { handleError } from '../../services/handle-error';
 
-import { 
-  APIRoute, 
-  FetchStatus, 
+import {
+  APIRoute,
+  FetchStatus,
   NameSpace,
-  START_COUNT_COMMENT 
-  } from '../../utils/const';
+  START_COUNT_COMMENT } from '../../utils/const';
 
 import { AppDispatch, State } from '../../types/state';
 
@@ -97,8 +95,8 @@ export const commentsSlice = createSlice({
       state.commentsCount = START_COUNT_COMMENT;
     },
   },
-  extraReducers: (buider) => {
-    buider
+  extraReducers: (builder) => {
+    builder
       .addCase(fetchCommentsAction.pending, (state) => {
         state.commentsStatus = FetchStatus.Pending;
       })

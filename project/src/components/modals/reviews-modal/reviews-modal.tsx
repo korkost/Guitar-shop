@@ -85,7 +85,7 @@ function ReviewsModal(): JSX.Element | null {
   const isValid = Object.values(formState).some(({ error }) => error);
   const isFormDisabled = sendCommentStatus === FetchStatus.Pending;
 
-  const handleChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (evt: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value, name } = evt.target;
 
     const regExp = formState[name].regexp;
@@ -136,7 +136,7 @@ function ReviewsModal(): JSX.Element | null {
               Ваше Имя
             </label>
             <input
-              onChange={handleChange}
+              onChange={handleInputChange}
               ref={inputFocus}
               className="form-review__input form-review__input--name"
               id="user-name"
@@ -155,7 +155,7 @@ function ReviewsModal(): JSX.Element | null {
               {ratingLabelMapRevers.map(([value, title]) => (
                 <Fragment key={title}>
                   <input
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                     className={`visually-hidden ${styles['rate__input']}`}
                     id={`star-${value}`}
                     name="rating"
@@ -178,7 +178,7 @@ function ReviewsModal(): JSX.Element | null {
           Достоинства
         </label>
         <input
-          onChange={handleChange}
+          onChange={handleInputChange}
           className={cn('form-review__input', [styles.input_mb], {
             [styles.input_mb_error]: formState.advantage.error,
           })}
@@ -196,7 +196,7 @@ function ReviewsModal(): JSX.Element | null {
           Недостатки
         </label>
         <input
-          onChange={handleChange}
+          onChange={handleInputChange}
           className={cn('form-review__input', {
             [styles.input_mb]: !formState.disadvantage.error,
           })}
@@ -218,7 +218,7 @@ function ReviewsModal(): JSX.Element | null {
           Комментарий
         </label>
         <textarea
-          onChange={handleChange}
+          onChange={handleInputChange}
           className={cn('form-review__input', 'form-review__input--textarea', {
             [styles.input_mb]: !formState.comment.error,
           })}

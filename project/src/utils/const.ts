@@ -3,6 +3,7 @@ export const MAX_NUMBER_OF_CARDS = 9;
 export const START_PAGE_NUMBER = 1;
 export const START_COUNT_COMMENT = 3;
 export const FAKE_ARRAY_LENGTH = 5;
+export const INDEX_FIRST_GUITAR = 0;
 
 interface RatingLabel {
   [key: number]: string;

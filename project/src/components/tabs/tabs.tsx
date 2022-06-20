@@ -16,7 +16,7 @@ function Tabs({ vendorCode, type, stringCount, description }: TabsProps): JSX.El
     description: false,
   });
 
-  const handleClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
+  const handleTabButtonClick = (evt: React.MouseEvent<HTMLAnchorElement>) => {
     evt.preventDefault();
 
     if (evt.currentTarget.id === 'characteristics') {
@@ -37,14 +37,14 @@ function Tabs({ vendorCode, type, stringCount, description }: TabsProps): JSX.El
   return (
     <div className="tabs">
       <a
-        onClick={handleClick}
+        onClick={handleTabButtonClick}
         className={cn('button button--medium', 'tabs__button', { 'button--black-border': !activeTab.characteristics })}
         href="/"
         id="characteristics">
         Характеристики
       </a>
       <a
-        onClick={handleClick}
+        onClick={handleTabButtonClick}
         className={cn('button button--medium', 'tabs__button', { 'button--black-border': !activeTab.description })}
         href="/"
         id="description">

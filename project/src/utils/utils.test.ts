@@ -1,12 +1,12 @@
-import { 
-  checkIsFull, 
-  adaptTypeToClient, 
-  formatDate, 
-  priceWithSpace 
+import {
+  checkIsFull,
+  adaptTypeToClient,
+  formatDate,
+  getPriceWithSpace
   } from './utils';
-import { 
+import {
   GuitarTypeFromTheServer,
-  GuitarTypeForClient 
+  GuitarTypeForClient
   } from './const';
 
 describe('Utils functions', () => {
@@ -40,9 +40,9 @@ describe('Utils functions', () => {
     });
   });
 
-  describe('check function priceWithSpace', () => {
+  describe('check function getPriceWithSpace', () => {
     it('function return correct price with space', () => {
-      expect(priceWithSpace(100000)).toBe('100 000');
+      expect(getPriceWithSpace(100000)).toBe('100 000');
     });
   });
 });

@@ -1,5 +1,12 @@
-import { GuitarTypeFromTheServer, GuitarTypeForClient, FAKE_ARRAY_LENGTH } from './const';
+import qs from 'query-string';
+import {
+  GuitarTypeFromTheServer,
+  GuitarTypeForClient,
+  FAKE_ARRAY_LENGTH,
+  MAX_NUMBER_OF_CARDS
+} from './const';
 import { mockProduct } from './mock';
+import { Query } from '../types/query';
 
 export const stars = Array.from({ length: 5 }, (v, k) => k + 1);
 
@@ -28,4 +35,23 @@ export const formatDate = (date: string) => {
   return new Date(date).toLocaleString('ru', { month: 'long', day: 'numeric' });
 };
 
-export const priceWithSpace = (number: number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+export const getPriceWithSpace = (number: number) => number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+
+export const createQueryByPage = (activePageNumber?: number) => {
+  const endLimit = activePageNumber ? activePageNumber * MAX_NUMBER_OF_CARDS : MAX_NUMBER_OF_CARDS;
+  const startLimit = endLimit - MAX_NUMBER_OF_CARDS;
+
+  return qs.stringify(
+    {
+      _start: startLimit,
+      _end: endLimit,
+    },
+    { skipNull: true, skipEmptyString: true },
+  );
+};
+
+export const createQuery = ({ activePageNumber}: Query) => {
+  const page = createQueryByPage(activePageNumber);
+
+  return [page].filter((currentQuery) => currentQuery !== '').join('&');
+};

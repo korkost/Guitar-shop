@@ -6,10 +6,14 @@ import Reviews from '../../components/reviews/reviews';
 import Tabs from '../../components/tabs/tabs';
 
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
-import { fetchCommentsAction, resetCommentsCounter, selectComments } from '../../store/comments-slice/comments-slice';
+import {
+  fetchCommentsAction,
+  resetCommentsCounter,
+  selectComments
+} from '../../store/comments-slice/comments-slice';
 import { fetchGuitarAction, selectGuitar } from '../../store/guitars-slice/guitars-slice';
 
-import { priceWithSpace } from '../../utils/utils';
+import { getPriceWithSpace } from '../../utils/utils';
 import styles from './product.module.css';
 
 function Product(): JSX.Element | null {
@@ -71,7 +75,7 @@ function Product(): JSX.Element | null {
         <div className="product-container__price-wrapper">
           <p className="product-container__price-info product-container__price-info--title">Цена:</p>
           <p className="product-container__price-info product-container__price-info--value">
-            {priceWithSpace(price)} ₽
+            {getPriceWithSpace(price)} ₽
           </p>
           <a className="button button--red button--big product-container__button" href="/">
             Добавить в корзину

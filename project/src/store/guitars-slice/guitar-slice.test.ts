@@ -35,11 +35,15 @@ describe('Guitars slice', () => {
 
   describe('guitars async action', () => {
     it('should dispatch fetchGuitarsAction when GET /guitars with query parameters', async () => {
+      const fakeParams = {
+        activePageNumber: 1,
+      };
+
       mockAPI.onGet(`${APIRoute.Guitars}?_embed=comments`).reply(200, mockProducts);
 
       const store = mockStore();
 
-      await store.dispatch(fetchGuitarsAction());
+      await store.dispatch(fetchGuitarsAction(fakeParams));
 
       const actions = store.getActions().map(({ type }) => type);
 
